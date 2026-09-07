@@ -1,0 +1,184 @@
+/* ── Ora · nocturne assistant ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Hanken+Grotesk:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  /* warm nocturne palette */
+  --color-ink: #0b0a0c;
+  --color-ink-2: #131116;
+  --color-surface: #191519;
+  --color-surface-2: #211c22;
+  --color-hair: #2c262f;
+  --color-fog: #b3a9b8;
+  --color-fog-dim: #7c7482;
+  --color-cream: #f3eee7;
+
+  /* ember accent */
+  --color-ember: #f5a15c;
+  --color-ember-deep: #e8763f;
+  --color-rose: #e56b8a;
+  --color-jade: #7fd6a6;
+
+  --animate-aurora: aurora 18s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-rise: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-blink: blink 1.2s steps(2, start) infinite;
+}
+
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1.05) rotate(0deg);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(8%, 6%, 0) scale(1.25) rotate(12deg);
+    opacity: 0.85;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* film-grain texture overlay */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* hide scrollbar (used on the composer textarea) */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chromium / WebKit */
+}
+
+/* refined scrollbar */
+.scroll-fine::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-fine::-webkit-scrollbar-thumb {
+  background: var(--color-hair);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.scroll-fine::-webkit-scrollbar-thumb:hover {
+  background: var(--color-fog-dim);
+  background-clip: padding-box;
+}
+
+/* shimmering gradient text (Magic UI flavour) */
+.shimmer-text {
+  background: linear-gradient(
+    110deg,
+    var(--color-fog-dim) 20%,
+    var(--color-cream) 45%,
+    var(--color-ember) 55%,
+    var(--color-fog-dim) 75%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: var(--animate-shimmer);
+}
+
+/* moving-border conic sweep (Aceternity flavour) */
+.moving-border {
+  position: relative;
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    conic-gradient(
+        from var(--angle, 0deg),
+        transparent 0%,
+        var(--color-ember) 20%,
+        transparent 40%
+      )
+      border-box;
+  border: 1px solid transparent;
+  animation: spin-border 5s linear infinite;
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes spin-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+::selection {
+  background: var(--color-ember);
+  color: var(--color-ink);
+}
