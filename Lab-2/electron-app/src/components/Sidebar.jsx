@@ -88,10 +88,10 @@ export default function Sidebar({
       <div className="border-t border-hair/70 p-3">
         <button className="flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-fog transition-colors hover:bg-surface/50 hover:text-cream">
           <div className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-ember to-ember-deep font-mono text-[11px] font-medium text-ink">
-            Y
+            N
           </div>
           <div className="flex-1 text-left leading-tight">
-            <div className="text-[13px] text-cream">Yatin</div>
+            <div className="text-[13px] text-cream">Nipun</div>
             <div className="font-mono text-[10px] text-fog-dim">Free plan</div>
           </div>
           <Settings className="h-4 w-4 text-fog-dim" />
