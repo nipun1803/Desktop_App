@@ -97,18 +97,31 @@ function App() {
           disabled={!cameraEnabled || !fullScreen}
           onClick={async () => {
             try {
-              const response = await window.athena.startTimerOnMain();
+              await window.athena.startTimerOnMain();
             } catch (error) {
-
+              console.error(error);
             }
           }}
         >
           Go To Test
         </button>
+
+        <button
+          className="btn btn-danger"
+          onClick={async () => {
+            try {
+              await window.athena.quitApp();
+            } catch (error) {
+              console.error(error);
+            }
+          }}
+        >
+          Quit App
+        </button>
       </div>
 
       <div>
-        {timer + ' (s) elapsed'}
+        {timer !== '' && timer + ' (s) elapsed'}
       </div>
     </div>
   );

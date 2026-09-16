@@ -19,5 +19,12 @@ contextBridge.exposeInMainWorld("athena", {
         } catch (error) {
             throw "error";
         }
+    },
+    quitApp: () => {
+        try {
+            return ipcRenderer.invoke('quit-app');
+        } catch (error) {
+            throw "error";
+        }
     }
 })

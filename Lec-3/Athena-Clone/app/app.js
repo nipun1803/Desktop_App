@@ -17,11 +17,26 @@ function createWindow() {
     window.loadURL('http://localhost:5173')
 }
 
-ipcMain.handle('start-timer', (event) => {
-    startTimestamp = Date.now()
-    setInterval(() => {
-        window.webContents.send('timer', (Date.now() - startTimestamp) / 1000);
+ipcMain.handle('start-timer', () => {
+    startTimestamp = Date.now();
+    const timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTimestamp) / 1000);
+        if (window && !window.isDestroyed()) {
+            window.webContents.send('timer', elapsed);
+        }
+        if (elapsed >= 10) {
+            clearInterval(timerInterval);
+            app.quit();
+        }
     }, 1000);
-})
+});
+
+ipcMain.handle('quit-app', () => {
+    app.quit();
+});
 
 app.whenReady().then(createWindow);
+
+app.on('window-all-closed', () => {
+    app.quit();
+});
