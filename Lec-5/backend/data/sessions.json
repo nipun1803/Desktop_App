@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "sessionId": "session-1790056902663",
+    "userId": "student-101",
+    "name": "Vaibhav",
+    "startedAt": "2026-09-22T06:01:42.663Z",
+    "submittedAt": "2026-09-22T06:02:25.129Z",
+    "status": "submitted",
+    "attempted": 1,
+    "correct": 1,
+    "wrong": 0,
+    "answers": [
+      {
+        "questionId": 1,
+        "selectedAnswer": 1,
+        "isCorrect": true,
+        "answeredAt": "2026-09-22T06:02:10.919Z"
+      }
+    ]
+  }
+]
